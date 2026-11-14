@@ -1,4 +1,6 @@
-mapa2 = {"chave": "valor"}
+# ENTRADAS ============
+
+mapa = {"chave": "valor"}
 
 mapa = [
     [2,1,9,9,9],
@@ -7,6 +9,8 @@ mapa = [
     [9,9,1,1,1]
 ]
 custos = []
+
+# FUNÇÕES ============
 
 def validar_entrada(mapa):
 
@@ -80,6 +84,9 @@ def guloso(mapa, x_atual, y_atual, custo):
         else:
             break
 
+    if x_atual == x_chegada and y_atual == y_chegada:
+                        custos.append(custo)
+
 
 def projeto_do_robo(mapa):
     x_atual = 0
@@ -88,13 +95,13 @@ def projeto_do_robo(mapa):
     
     if validar_entrada(mapa):
         if mapa[0][0] == 0 or mapa[0][0] == None:
-            print("sem_caminho")
+            print("entrada_invalida")
         elif mapa[len(mapa)-1][len(mapa[0])-1] == 0 or mapa[len(mapa)-1][len(mapa[0])-1] == None: # essa porra é pra ver se o destino é vazio
             print("sem_caminho")
         else: # TROCA DE ALGORITMOS ----AQUI-----
 
-            #caminhada(mapa, x_atual, y_atual, custo)
-            guloso(mapa, x_atual, y_atual, custo)
+            caminhada(mapa, x_atual, y_atual, custo)
+            #guloso(mapa, x_atual, y_atual, custo)
 
             if len(custos) > 0:
                 print("OK, custo "+ str(min(custos)))
@@ -102,5 +109,7 @@ def projeto_do_robo(mapa):
                 print("sem_caminho")
     else:
         print("entrada_invalida")
+
+# CHAMADA DO PROGRAMA ============
 
 projeto_do_robo(mapa)
