@@ -1,14 +1,18 @@
 # ENTRADAS ============
 
-mapa = {"chave": "valor"}
+mapa2= [[1, 2], 
+ [3]    ]
+
 
 mapa = [
-    [2,2,9,9,9],
-    [1,0,1,1,9],
+    [2,1,9,9,9],
+    [3,None,1,1,9],
+    [1,1,1,None,2],
     [9,9,1,1,1],
-    [9,9,1,1,1]
 ]
 custos = []
+
+qtndChamadasRecursivas = 0
 
 # FUNÇÕES ============
 
@@ -26,13 +30,15 @@ def validar_entrada(mapa):
             return False
         for x in i:
             if x is None:
-                continue
+                return True
             if type(x) is not int or x < 0:
                 return False
             
     return True
 
 def caminhada(mapa, x_atual, y_atual, custo):
+    global qtndChamadasRecursivas
+    qtndChamadasRecursivas += 1
     if mapa[x_atual][y_atual] != 0 and mapa[x_atual][y_atual] != None:
         custo += mapa[x_atual][y_atual]
 
@@ -95,7 +101,7 @@ def projeto_do_robo(mapa):
     
     if validar_entrada(mapa):
         if mapa[0][0] == 0 or mapa[0][0] == None:
-            print("entrada_invalida")
+            print("sem_caminho")
         elif mapa[len(mapa)-1][len(mapa[0])-1] == 0 or mapa[len(mapa)-1][len(mapa[0])-1] == None: # essa porra é pra ver se o destino é vazio
             print("sem_caminho")
         else: # TROCA DE ALGORITMOS ----AQUI-----
@@ -105,6 +111,7 @@ def projeto_do_robo(mapa):
 
             if len(custos) > 0:
                 print("OK, custo "+ str(min(custos)))
+                print("quantidade de chamadas recursivas: " + str(qtndChamadasRecursivas)) # tem que usar a caminahda
             else:
                 print("sem_caminho")
     else:
