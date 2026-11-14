@@ -3,9 +3,9 @@
 mapa = {"chave": "valor"}
 
 mapa = [
-    [2,1,9,9,9],
-    [None,0,1,1,9],
-    [1,1,1,1,1],
+    [2,2,9,9,9],
+    [1,0,1,1,9],
+    [9,9,1,1,1],
     [9,9,1,1,1]
 ]
 custos = []
@@ -53,13 +53,16 @@ def guloso(mapa, x_atual, y_atual, custo):
     x_chegada = len(mapa) - 1
     y_chegada = len(mapa[0]) - 1
 
-    while x_atual != x_chegada or y_atual != y_chegada:
+    while True:
         #variavel para o algoritmo guloso
         direita_disponivel = False
         baixo_disponivel = False
         
         if mapa[x_atual][y_atual] != 0 and mapa[x_atual][y_atual] != None:
             custo += mapa[x_atual][y_atual]
+            if x_atual == x_chegada and y_atual == y_chegada:
+                custos.append(custo)
+                break
 
         if y_atual+1 < len(mapa[0]): #verifica se não sai do mapa
             #define a disponibilidade
@@ -83,9 +86,6 @@ def guloso(mapa, x_atual, y_atual, custo):
             x_atual += 1
         else:
             break
-
-    if x_atual == x_chegada and y_atual == y_chegada:
-                        custos.append(custo)
 
 
 def projeto_do_robo(mapa):
